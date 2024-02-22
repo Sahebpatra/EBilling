@@ -1,0 +1,61 @@
+﻿function isNumber(evt) {
+    var iKeyCode = (evt.which) ? evt.which : evt.keyCode
+    if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
+function ValidateForm(ddlLogComplaintStatus, txtLogDescription, txtLogRemarks, message, btnSubmit) {
+    firstErrorControl = "";
+    errMsg = "";
+    document.getElementById(message).innerHTML = "";
+    document.getElementById("ctl00_ContentPlaceHolder1_divAlert").style.display = "none";
+
+    ValidateDropDown(ddlLogComplaintStatus, "Please select complaint type.");
+    ValidateRequired(txtLogDescription, "Please enter log description.");
+
+    if (document.getElementById(btnSubmit).value == "Submit") {
+        if (firstErrorControl != "") {
+            SetControlFocus(firstErrorControl);
+            errMsg = "<table>" + errMsg + "</table>";
+            document.getElementById(message).innerHTML = errMsg;
+            document.getElementById("ctl00_ContentPlaceHolder1_divAlert").style.display = "block";
+
+            return false;
+        }
+        else {
+            var n = document.getElementById(btnSubmit).value;
+            if (confirm("Are you sure to submit?")) {
+                document.getElementById(message).innerHTML = "";
+                document.getElementById("ctl00_ContentPlaceHolder1_divAlert").style.display = "none";
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+    else {
+        if (firstErrorControl != "") {
+            SetControlFocus(firstErrorControl);
+            errMsg = "<table>" + errMsg + "</table>";
+            document.getElementById(message).innerHTML = errMsg;
+            document.getElementById("ctl00_ContentPlaceHolder1_divAlert").style.display = "block";
+
+            return false;
+        }
+        else {
+            var n = document.getElementById(btnSubmit).value;
+            if (confirm("Are you sure to Update?")) {
+                document.getElementById(btnSubmit).name;
+                document.getElementById(message).innerHTML = "";
+                document.getElementById("ctl00_ContentPlaceHolder1_divAlert").style.display = "none";
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+}

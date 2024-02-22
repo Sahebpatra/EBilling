@@ -1,0 +1,11 @@
+﻿.p-l-0 {
+    padding-left:0px !important;
+}
+
+.p-r-0 {
+    padding-right: 0px !important;
+}
+
+#ctl00_ContentPlaceHolder1_lblValidationMessage > table > tbody > tr > td {
+    font-size:11px !important;
+}

@@ -1,0 +1,697 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="app">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <%--   <link rel="stylesheet" href="Theme/css/material-dashboard.css" type="text/css" />--%>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script src="Theme/js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="Theme/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="Theme/css/custom.css" type="text/css" />
+    <link rel="stylesheet" href="Theme/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="Theme/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="Theme/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="Theme/js/calendar/bootstrap_calendar.css" type="text/css" />
+    <link rel="stylesheet" href="Theme/css/app.css" type="text/css" />
+    <script src="Theme/js/bootstrap.bundle.min.js"></script>
+    <script src="Theme/js/moment.js"></script>
+    <link rel="stylesheet" href="Theme/vendor/notify/notify-flat.css" />
+    <style type="text/css">
+        .select2.select2-container {
+            width: 100% !important;
+        }
+
+        .text-underline {
+            text-decoration: underline;
+        }
+
+        .slimScrollDiv {
+            overflow: scroll !important;
+        }
+
+        /*@media (min-width: 768px) {
+            .nav-xs .slimScrollDiv, .nav-xs .slim-scroll {
+                overflow: scroll !important;
+            }
+        }
+
+        .slimScrollBar {
+            background: rgb(43 247 77) !important;
+            width: 10px !important;
+        }*/
+    </style>
+    <script type="text/javascript">
+        function Dashbord() {
+            location.href = "Index.aspx";
+        }
+
+        //$(document).ready(function () {
+
+        //    function disableBackButton() {
+        //        window.history.forward(1);
+        //    }
+        //})
+
+        //function Dashbord() {
+        //    location.href = "Home.aspx";
+        //}
+    </script>
+    <%--  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>--%>
+    <!-- Bootstrap -->
+    <script src="Theme/js/bootstrap.js" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        <style>
+            .modalProgress {
+                position: fixed;
+                z-index: 999999999;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.61);
+            }
+
+            .center {
+                z-index: 1999;
+                margin: 250px auto;
+                padding: 10px;
+                width: 130px;
+                opacity: 1;
+                -moz-opacity: 1;
+            }
+
+                .center img {
+                    height: 128px;
+                    width: 128px;
+                }
+
+
+            /* ALL LOADERS */
+
+            .loader {
+                width: 100px;
+                height: 100px;
+                border-radius: 100%;
+                position: relative;
+                margin: 0 auto;
+            }
+
+            /* LOADER 1 */
+
+            #loader-1:before, #loader-1:after {
+                content: "";
+                position: absolute;
+                top: -10px;
+                left: -10px;
+                width: 100%;
+                height: 100%;
+                border-radius: 100%;
+                border: 10px solid transparent;
+                border-top-color: #38f8ff;
+            }
+
+            #loader-1:before {
+                z-index: 100;
+                animation: spin 1s infinite;
+            }
+
+            #loader-1:after {
+                border: 10px solid #b3b3b3;
+            }
+
+            @keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                    -ms-transform: rotate(0deg);
+                    -o-transform: rotate(0deg);
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(360deg);
+                    -ms-transform: rotate(360deg);
+                    -o-transform: rotate(360deg);
+                    transform: rotate(360deg);
+                }
+            }
+
+            #ctl00_lblRepurchaseWallet, #ctl00_lblIncentiveWallet {
+                padding: 10px !important;
+                background-color: cyan !important;
+                color: blueviolet !important;
+                font-weight: bold !important;
+            }
+        </style>
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server" id="form1">
+        <section class="vbox">
+            <header class="bg-dark dk header navbar navbar-fixed-top-xs">
+                <div class="navbar-header aside-md">
+                    <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <a href="#" class="navbar-brand" data-toggle="fullscreen">
+                        <img src="Theme/images/tatsteel-white-logo.png" alt="Company Logo">
+                    </a>
+                    <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                </div>
+                <ul class="nav navbar-nav hidden-xs">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle dker" data-toggle="dropdown">
+                            <i class="fa fa-building-o"></i>
+                            <span class="font-bold">Activity</span>
+                        </a>
+                        <section class="dropdown-menu aside-xl on animated fadeInLeft no-borders lt">
+                            <div class="wrapper lter m-t-n-xs">
+                                <a href="#" class="thumb pull-left m-r">
+                                    <img src="images/avatar.jpg" class="img-circle" runat="server" id="imgLeftuserPic" />
+                                </a>
+                                <div class="clear">
+                                    <a href="#"><span class="text-white font-bold ">
+                                        <asp:Label ID="lblLeftUserName" runat="server"></asp:Label>
+                                    </span></a>
+
+                                    <small class="block">
+                                        <asp:Label ID="lblDesgination" runat="server"></asp:Label></small>
+                                </div>
+                            </div>
+                            <%-- <div class="row m-l-none m-r-none m-b-n-xs text-center">
+                                <div class="col-xs-4">
+                                    <div class="padder-v">
+                                        <span class="m-b-xs h4 block text-white">
+                                            <asp:Label ID="lblTotalDirect" runat="server"></asp:Label></span>
+                                        <small class="text-muted">Direct</small>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 dk">
+                                    <div class="padder-v">
+                                        <span class="m-b-xs h4 block text-white">
+                                            <asp:Label ID="lblTotalTeam" runat="server"></asp:Label>
+                                        </span>
+                                        <small class="text-muted">Team</small>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="padder-v">
+                                        <span class="m-b-xs h4 block text-white">
+                                            <asp:Label ID="lblTotalWP" runat="server"></asp:Label></span>
+                                        <small class="text-muted">WP</small>
+                                    </div>
+                                </div>
+                            </div>--%>
+                        </section>
+                    </li>
+                    <li>
+                        <div class="m-t m-l">
+                            <a href="price.html" class="dropdown-toggle btn btn-xs btn-primary" title="Upgrade"><i class="fa fa-long-arrow-up"></i></a>
+                        </div>
+                    </li>
+                    <li></li>
+                    <li>
+                        <div class="m-t m-l-n">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Label runat="server" ID="headerlabel" ForeColor="White" Font-Bold="true" class="form-label"></asp:Label>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user">
+                    <li class="hidden-xs">
+                        <a class="dropdown-toggle">
+                            <span class="wallet_bg">
+                                <asp:Label ID="lblRepurchaseWallet" runat="server" CssClass="badge badge-success bg-danger m-l-n-sm"></asp:Label>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a class="dropdown-toggle">
+                            <span class="wallet_bg">
+                                <asp:Label ID="lblIncentiveWallet" runat="server" CssClass="badge badge-success bg-danger m-l-n-sm"></asp:Label>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="hidden-xs">
+                        <a class="dropdown-toggle dk">
+                            <span id="date" style="font-weight: bold;"></span>
+                        </a>
+                    </li>
+                    <%--<li class="hidden-xs">
+                        <a href="#" class="dropdown-toggle dk" data-toggle="dropdown">
+                            <i class="fa fa-bell"></i>
+                            <span class="badge badge-sm up bg-danger m-l-n-sm count">2</span>
+                        </a>
+                        <section class="dropdown-menu aside-xl">
+                            <section class="panel bg-white">
+                                <header class="panel-heading b-light bg-light">
+                                    <strong>You have <span class="count">2</span> notifications</strong>
+                                </header>
+                                <div class="list-group list-group-alt animated fadeInRight">
+                                    <a href="#" class="media list-group-item">
+                                        <span class="pull-left thumb-sm">
+                                            <img src="images/avatar.jpg" alt="John said" class="img-circle">
+                                        </span>
+                                        <span class="media-body block m-b-none">Use awesome animate.css<br>
+                                            <small class="text-muted">10 minutes ago</small>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="media list-group-item">
+                                        <span class="media-body block m-b-none">1.0 initial released<br>
+                                            <small class="text-muted">1 hour ago</small>
+                                        </span>
+                                    </a>
+                                </div>
+                                <footer class="panel-footer text-sm">
+                                    <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
+                                    <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+                                </footer>
+                            </section>
+                        </section>
+                    </li>
+                    <li class="dropdown hidden-xs">
+                        <a href="#" class="dropdown-toggle dker" data-toggle="dropdown"><i class="fa fa-fw fa-search"></i></a>
+                        <section class="dropdown-menu aside-xl animated fadeInUp">
+                            <section class="panel bg-white">
+                                <form role="search">
+                                    <div class="form-group wrapper m-b-none">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-info btn-icon"><i class="fa fa-search"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </section>
+                        </section>
+                    </li>--%>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="thumb-sm avatar pull-left">
+                                <asp:Image ID="imgProfileImage" runat="server" ImageUrl="Theme/images/avatar.jpg" />
+                            </span>
+                            <asp:Label ID="lblUserId" runat="server"></asp:Label>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight">
+                            <span class="arrow top"></span>
+                            <li style="text-align: center;">
+                                <asp:Label ID="lblUserName" ForeColor="Black" runat="server"></asp:Label>
+                            </li>
+                            <%-- duplicate test copy start--%>
+                    </li>
+                    <div class="line"></div>
+                    <li style="text-align: center;">
+                        <asp:Label ID="lblCompanyId" ForeColor="Black" runat="server"></asp:Label>
+                    </li>
+                    <%-- duplicate test copy End--%>
+
+
+                    <div class="line"></div>
+                    <li style="text-align: center;">
+                        <asp:Label ID="lblUserGroup" ForeColor="Black" runat="server"></asp:Label>
+                        <div class="line"></div>
+                        <%-- <li>
+                                <a href="#">
+                                    <span class="badge bg-danger pull-right">3</span>
+                                    Notifications
+                               </a>
+                            </li>--%>
+                    <li>
+                        <a href="ChangePassword.aspx">Change Password</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="Logout.aspx">Logout</a>
+                    </li>
+                </ul>
+                </li>
+                </ul>
+            </header>
+            <section>
+                <section class="hbox stretch">
+                    <!-- .aside -->
+                    <aside class="bg-dark lter aside-md hidden-print nav-xs" id="nav" style="z-index: 9999;">
+                        <section class="vbox">
+                            <header class="header bg-primary lter text-center clearfix">
+                                <div class="btn-group">
+                                    <a href="DashBoard.aspx" title="Home"><i class="fa fa-home icon h3"></i></a>
+                                    <div class="btn-group hidden-nav-xs">
+                                        <%-- <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                                            Switch Project
+                   
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu text-left">
+                                            <li><a href="#">Project</a></li>
+                                            <li><a href="#">Another Project</a></li>
+                                            <li><a href="#">More Projects</a></li>
+                                        </ul>--%>
+                                        <a href="Index.aspx">
+                                            <h4><b>HOME</b></h4>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </header>
+                            <section class="w-f scrollable">
+                                <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
+
+                                    <!-- nav -->
+                                    <nav class="nav-primary hidden-xs">
+                                        <asp:Literal ID="plcMenu" runat="server"></asp:Literal>
+                                    </nav>
+                                    <!-- / nav -->
+                                </div>
+                            </section>
+
+                            <footer class="footer lt hidden-xs b-t b-dark">
+                                <%--  <div id="chat" class="dropup">
+                                    <section class="dropdown-menu on aside-md m-l-n">
+                                        <section class="panel bg-white">
+                                            <header class="panel-heading b-b b-light">Active chats</header>
+                                            <div class="panel-body animated fadeInRight">
+                                                <p class="text-sm">No active chats.</p>
+                                                <p><a href="#" class="btn btn-sm btn-default">Start a chat</a></p>
+                                            </div>
+                                        </section>
+                                    </section>
+                                </div>
+                                <div id="invite" class="dropup">
+                                    <section class="dropdown-menu on aside-md m-l-n">
+                                        <section class="panel bg-white">
+                                            <header class="panel-heading b-b b-light">
+                                                John <i class="fa fa-circle text-success"></i>
+                                            </header>
+                                            <div class="panel-body animated fadeInRight">
+                                                <p class="text-sm">No contacts in your lists.</p>
+                                                <p><a href="#" class="btn btn-sm btn-facebook"><i class="fa fa-fw fa-facebook"></i>Invite from Facebook</a></p>
+                                            </div>
+                                        </section>
+                                    </section>
+                                </div>--%>
+                                <a href="#nav" data-toggle="class:nav-xs" class="pull-right btn btn-sm btn-dark btn-icon">
+                                    <i class="fa fa-angle-left text"></i>
+                                    <i class="fa fa-angle-right text-active"></i>
+                                </a>
+                            </footer>
+                        </section>
+                    </aside>
+                    <!-- /.aside -->
+                    <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+                    </asp:ToolkitScriptManager>
+                    <section id="content">
+                        <section class="vbox">
+                            <section class="scrollable padder">
+                                <div style="width: 100%; min-height: 540px;">
+
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                    </asp:ContentPlaceHolder>
+
+                                    <asp:UpdateProgress runat="server" ID="updLoader">
+                                        <ProgressTemplate>
+                                            <div class="modalProgress">
+                                                <div class="center">
+                                                    <div class="container">
+                                                        <div class="row cf">
+                                                            <div class="col-md-3">
+                                                                <div class="loader" id="loader-1"></div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
+                                <footer style="text-align: center; font-weight: bold; background-color: #b8e49575;">
+                                    <div class="copyright float-center">
+                                        <br />
+                                        <span>&copy; 
+                                            <script>
+                                                document.write(new Date().getFullYear())
+                                            </script>
+                                            <asp:Label ID="lblFooterCompanyName" runat="server"></asp:Label>
+                                        </span>
+                                        <br />
+                                        <br />
+                                    </div>
+                                </footer>
+                                <%--  <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                </asp:ContentPlaceHolder>--%>
+                            </section>
+                        </section>
+                        <%--                        <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>--%>
+                    </section>
+
+                    <aside class="bg-light lter b-l aside-md hide" id="notes">
+                        <div class="wrapper">Notification</div>
+                    </aside>
+                </section>
+            </section>
+        </section>
+    </form>
+    <!-- Notify js -->
+    <script src="Theme/js/jquery.easing.1.3.js"></script>
+    <script src="Theme/vendor/notify/notify.js"></script>
+    <script src="Theme/vendor/notify/notify-custom.js"></script>
+
+    <!-- App -->
+    <script src="Theme/js/app.js" type="text/javascript"></script>
+    <script src="Theme/js/app.plugin.js" type="text/javascript"></script>
+    <script src="Theme/js/slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="Theme/js/charts/easypiechart/jquery.easy-pie-chart.js" type="text/javascript"></script>
+    <script src="Theme/js/charts/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="Theme/js/charts/flot/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="Theme/js/charts/flot/jquery.flot.tooltip.min.js" type="text/javascript"></script>
+    <script src="Theme/js/charts/flot/jquery.flot.resize.js" type="text/javascript"></script>
+    <script src="Theme/js/charts/flot/jquery.flot.grow.js" type="text/javascript"></script>
+    <script src="Theme/js/charts/flot/demo.js" type="text/javascript"></script>
+
+    <script src="Theme/js/calendar/bootstrap_calendar.js" type="text/javascript"></script>
+    <script src="Theme/js/calendar/demo.js" type="text/javascript"></script>
+
+    <script src="Theme/js/sortable/jquery.sortable.js" type="text/javascript"></script>
+    <script src="Theme/js/jquery.sumoselect.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            // bind your jQuery events here initially
+
+            $('.datepicker').each(function () {
+                var options = {
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    minYear: 1901,
+                    applyButtonClasses: "font-medium text-xs inline-block py-1 px-2 shadow-md mt-2 rounded text-white bg-green-700 badge-lbl",
+                    cancelButtonClasses: "font-medium text-xs inline-block py-1 px-2 shadow-md mt-2 rounded text-white bg-red-700 badge-lbl",
+                    locale: { format: 'DD/MM/YYYY' }
+                };
+
+                if ($(this).data('daterange')) {
+                    options.singleDatePicker = false;
+                    options.autoUpdateInput = false;
+                    options.locale = { format: 'DD/MM/YYYY', cancelLabel: 'Clear' };
+                    $(this).daterangepicker(options);
+                }
+
+                if ($(this).data('datepicker')) {
+                    $(this).daterangepicker(options);
+                }
+
+                if ($(this).data('datetimerange')) {
+                    options.singleDatePicker = false;
+                    options.autoUpdateInput = false;
+                    options.timePicker = true;
+                    options.locale = { format: 'DD/MM/YYYY HH:mm', cancelLabel: 'Clear' };
+
+                    $(this).daterangepicker(options).on({
+                        'apply.daterangepicker': function (ev, picker) {
+                            var startDate = picker.startDate;
+                            var endDate = picker.endDate;
+                            $(this).val(startDate.format('DD/MM/YYYY HH:mm') + " - " + endDate.format('DD/MM/YYYY HH:mm'));
+                        },
+                        'cancel.daterangepicker': function (ev, picker) {
+                            $(this).val("");
+                        }
+                    });
+                }
+
+                if ($(this).data('timepicker')) {
+                    options.timePicker = true;
+                    options.locale = {
+                        format: 'HH:mm'
+                    };
+                    $(this).daterangepicker(options);
+                }
+
+            });
+
+            $('.timepicker').each(function () {
+                var options = {
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    minYear: 1901,
+                    timePicker: true,
+                    autoUpdateInput: false,
+                    applyButtonClasses: "font-medium text-xs inline-block py-1 px-2 shadow-md mt-2 rounded text-white bg-green-700 badge-lbl",
+                    cancelButtonClasses: "font-medium text-xs inline-block py-1 px-2 shadow-md mt-2 rounded text-white bg-red-700 badge-lbl",
+                    locale: {
+                        format: 'HH:mm',
+                        cancelLabel: 'Clear'
+                    },
+
+                }
+
+                $(this).daterangepicker(options).on({
+                    'show.daterangepicker': function (ev, picker) {
+                        picker.container.find(".calendar-table").hide();
+                    },
+                    'apply.daterangepicker': function (ev, picker) {
+                        var startDate = picker.startDate;
+                        $(this).val(startDate.format('HH:mm'));
+                    },
+                    'cancel.daterangepicker': function (ev, picker) {
+                        var startDate = picker.startDate;
+                        $(this).val("");
+                    }
+                });
+            });
+
+            $(".collapse-div-btn").on("click", function (e) {
+                $(this).parent().parent().toggleClass("collapsed-div");
+            });
+
+            $('input[data-daterange=true]').on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            });
+
+            $('input[data-daterange=true]').on('cancel.daterangepicker', function (ev, picker) {
+                $(this).val('');
+            });
+
+
+            setInterval(function () {
+                $('#date').html(moment().format("dddd, MMMM Do, YYYY, h:MM:ss A"));
+            }, 1000);
+
+
+
+        });
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_endRequest(function () {
+            feather.replace();
+            $(".select2").select2();
+
+
+
+            $(".collapse-div-btn").on("click", function (e) {
+                $(this).parent().parent().toggleClass("collapsed-div");
+            });
+
+            $('.datepicker').each(function () {
+                var options = {
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    minYear: 1901,
+                    applyButtonClasses: "font-medium text-xs inline-block py-1 px-2 shadow-md mt-2 rounded text-white bg-green-700 badge-lbl",
+                    cancelButtonClasses: "font-medium text-xs inline-block py-1 px-2 shadow-md mt-2 rounded text-white bg-red-700 badge-lbl",
+                    locale: { format: 'DD/MM/YYYY' }
+                };
+
+                if ($(this).data('daterange')) {
+                    options.singleDatePicker = false;
+                    options.autoUpdateInput = false;
+                    options.locale = { format: 'DD/MM/YYYY', cancelLabel: 'Clear' };
+                    $(this).daterangepicker(options);
+                }
+
+                if ($(this).data('datepicker')) {
+                    $(this).daterangepicker(options);
+                }
+
+                if ($(this).data('datetimerange')) {
+                    options.singleDatePicker = false;
+                    options.autoUpdateInput = false;
+                    options.timePicker = true;
+                    options.locale = { format: 'DD/MM/YYYY HH:mm', cancelLabel: 'Clear' };
+
+                    $(this).daterangepicker(options).on({
+                        'apply.daterangepicker': function (ev, picker) {
+                            var startDate = picker.startDate;
+                            var endDate = picker.endDate;
+                            $(this).val(startDate.format('DD/MM/YYYY HH:mm') + " - " + endDate.format('DD/MM/YYYY HH:mm'));
+                        },
+                        'cancel.daterangepicker': function (ev, picker) {
+                            $(this).val("");
+                        }
+                    });
+                }
+
+                if ($(this).data('timepicker')) {
+                    options.timePicker = true;
+                    options.locale = {
+                        format: 'HH:mm'
+                    };
+                    $(this).daterangepicker(options);
+                }
+
+            });
+
+            $('.timepicker').each(function () {
+                var options = {
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    minYear: 1901,
+                    timePicker: true,
+                    autoUpdateInput: false,
+                    applyButtonClasses: "font-medium text-xs inline-block py-1 px-2 shadow-md mt-2 rounded text-white bg-green-700 badge-lbl",
+                    cancelButtonClasses: "font-medium text-xs inline-block py-1 px-2 shadow-md mt-2 rounded text-white bg-red-700 badge-lbl",
+                    locale: {
+                        format: 'HH:mm',
+                        cancelLabel: 'Clear'
+                    },
+                }
+
+                $(this).daterangepicker(options).on({
+                    'show.daterangepicker': function (ev, picker) {
+                        picker.container.find(".calendar-table").hide();
+                    },
+                    'apply.daterangepicker': function (ev, picker) {
+                        var startDate = picker.startDate;
+                        $(this).val(startDate.format('HH:mm'));
+                    },
+                    'cancel.daterangepicker': function (ev, picker) {
+                        var startDate = picker.startDate;
+                        $(this).val("");
+                    }
+                });
+            });
+
+            $('input[data-daterange=true]').on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            });
+
+            $('input[data-daterange=true]').on('cancel.daterangepicker', function (ev, picker) {
+                $(this).val('');
+            });
+
+
+
+
+        });
+    </script>
+</body>
+</html>
+

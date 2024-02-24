@@ -21,7 +21,8 @@ public partial class CompanyRegistration : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
-        {   
+        {
+            CheckLogin();
             getstatemasterdetails();
             //getcitmasterdetails();
             //Response.Write("<script>alert('Hello');</script>");
@@ -33,7 +34,10 @@ public partial class CompanyRegistration : System.Web.UI.Page
     {
         CompanyRegistrationClass contact_Page_Class = new CompanyRegistrationClass();
         DataSet dataSet = new DataSet();
-        dataSet = contact_Page_Class.GetCompanyRegisterList();
+     
+            var UserId = Convert.ToString(userInfo.UserId);
+      
+        dataSet = contact_Page_Class.GetCompanyRegisterList(UserId);
 
         Grd_CompanyRegisterList.DataSource = dataSet.Tables[0];
         Grd_CompanyRegisterList.DataBind();

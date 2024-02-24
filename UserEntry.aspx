@@ -114,6 +114,17 @@
             <section class="panel panel-default">
                 <header class="panel-heading font-bold">User Details: </header>
                 <div class="panel-body">
+                    <%--<asp:HiddenField runat="server" id="hdnUserId" value=""/>--%>
+                    <%--<div class="col-sm-3" id="divCom" >
+                        <div class="form-group">
+                            <label>Comapany : </label>
+                            <asp:DropDownList runat="server" ID="ddlComapany" class="form-control">
+                                <asp:ListItem Enabled="true" Text="Select Company" Value="-1"></asp:ListItem>
+                                <asp:ListItem Text="January" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="February" Value="2"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>--%>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>User ID : </label>
@@ -137,11 +148,11 @@
                             <label>Last Name: </label>
                             <asp:TextBox ID="txtLastName" class="form-control" placeholder="Enter Last Name" runat="server"></asp:TextBox>
                         </div>
-                    </div> 
+                    </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Signature: </label>
-                            <asp:FileUpload id="FileUpload1" runat="server" />
+                            <asp:FileUpload ID="FileUpload1" runat="server" />
                         </div>
                     </div>
 
@@ -156,7 +167,7 @@
                 <div class="col-sm-4 hidden-xs">
                 </div>
                 <div class="col-sm-4 text-center">
-                    <asp:Button ID="btnUserEnty" class="btn btn-success" runat="server" Style="text-align: center;" Text="Submit Data" OnClick="btnUserEnty_Click"/>
+                    <asp:Button ID="btnUserEnty" class="btn btn-success" runat="server" Style="text-align: center;" Text="Submit Data" OnClick="btnUserEnty_Click" />
                 </div>
                 <div class="col-sm-4 text-right text-center-xs">
                 </div>
@@ -205,7 +216,7 @@
                                                     <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="5%" />
                                                     <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="5%" />
                                                 </asp:TemplateField>
-                                                
+
                                             </Columns>
                                         </asp:GridView>
                                     </ContentTemplate>
@@ -242,5 +253,18 @@
             </div>
         </div>
     </div>
+<%--<script>
+    $(document).ready(function () {
+        debugger
+        var UserName = $("#ctl00_ContentPlaceHolder1_hdnUserId").val();
+        if (UserName == "Admin") {
+            $("#divCom").show();
+        }
+        else {
+            $("#divCom").hide();
+        }
+    })
+</script>--%>
 </asp:Content>
+
 

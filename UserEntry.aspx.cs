@@ -30,9 +30,21 @@ public partial class UserEntry : System.Web.UI.Page
             }
             CompanyRegisterGrd(CompanyId);
             CheckLogin();
+            //hdnUserId.Value =Convert.ToString(userInfo.UserId);
+            //BindComapnyDropDownList();
         }
     }
 
+    //private void BindComapnyDropDownList()
+    //{
+    //    CompanyRegistrationClass contact_Page_Class = new CompanyRegistrationClass();
+    //    DataSet dataSet = new DataSet();
+    //    dataSet = contact_Page_Class.GetCompanyList();
+    //    ddlComapany.DataSource = dataSet.Tables[0];
+    //    ddlComapany.DataTextField = "Name";
+    //    ddlComapany.DataValueField = "ID";
+    //    ddlComapany.DataBind();
+    //} 
     private void CompanyRegisterGrd(int CompanyId)
     {
         CompanyRegistrationClass contact_Page_Class = new CompanyRegistrationClass();

@@ -19,10 +19,13 @@ public class CompanyRegistrationClass
         //
     }
 
-    public DataSet GetCompanyRegisterList()
+    public DataSet GetCompanyRegisterList(string UserId)
     {
         System.Data.DataSet DS;
-        DS = DBFactory.GetHelper().ExecuteDataSet("[SP_CompanyregisterGridView]", System.Data.CommandType.StoredProcedure);
+        SqlParameter[] sqlParams ={
+                                   new SqlParameter("@UserId",UserId),
+                                  };
+        DS = DBFactory.GetHelper().ExecuteDataSet("[SP_CompanyregisterGridView]", System.Data.CommandType.StoredProcedure, sqlParams);
         return DS;
     }
 
@@ -78,6 +81,12 @@ public class CompanyRegistrationClass
                                    new SqlParameter("@CompanyId",CompanyId),
                                   };
         DS = DBFactory.GetHelper().ExecuteDataSet("SP_GetNewUserLit", System.Data.CommandType.StoredProcedure, sqlParams);
+        return DS;
+    } 
+    public DataSet GetCompanyList()
+    {
+        DataSet DS;
+        DS = DBFactory.GetHelper().ExecuteDataSet("SP_GetCompanyList", System.Data.CommandType.StoredProcedure);
         return DS;
     }
 
